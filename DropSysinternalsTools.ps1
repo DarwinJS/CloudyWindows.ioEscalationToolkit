@@ -12,7 +12,7 @@ Invoke-Expression (invoke-webrequest -uri 'https://raw.githubusercontent.com/Dar
 
 Param
 (
-    [string[]]$ToolsToPull = procexp.exe,procmon.exe,autoruns.exe
+    [string[]]$ToolsToPull = @('procexp.exe','procmon.exe','autoruns.exe'),
     [string]$TargetFolder = "$env:public"
 )
 
