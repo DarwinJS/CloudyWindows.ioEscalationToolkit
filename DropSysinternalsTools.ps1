@@ -10,7 +10,7 @@ Invoke-Expression (invoke-webrequest -uri 'https://raw.githubusercontent.com/Dar
 
 #>
 
-If (!$TooslToPull)
+If (!$ToolsToPull)
 {$ToolsToPull = ("procexp.exe;procmon.exe;autoruns.exe" -split ';')}
 If (!$TargetFolder)
 {$TargetFolder = "$env:public"}
