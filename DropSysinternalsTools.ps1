@@ -10,11 +10,10 @@ Invoke-Expression (invoke-webrequest -uri 'https://raw.githubusercontent.com/Dar
 
 #>
 
-Param
-(
-    [string[]]$ToolsToPull = ("procexp.exe;procmon.exe;autoruns.exe" -split ';'),
-    [string]$TargetFolder = "$env:public"
-)
+If (!$TooslToPull)
+{$ToolsToPull = ("procexp.exe;procmon.exe;autoruns.exe" -split ';')}
+If (!$TargetFolder)
+{$TargetFolder = "$env:public"}
 
 ForEach ($Tool in $ToolsToPull)
 {
