@@ -1,4 +1,5 @@
 <#
+CloudyWindows.io Escalation Toolkit: http://cloudywindows.io
 #Run this directly from this location with: 
 Invoke-Expression (invoke-webrequest -uri 'https://raw.githubusercontent.com/DarwinJS/WindowsEscalationToolkit/master/DropSysinternalsTools.ps1')
 
@@ -21,5 +22,7 @@ If (!$TargetFolder)
 
 ForEach ($Tool in $ToolsToPull)
 {
-    Invoke-WebRequest -Uri "http://live.sysinternals.com/$Tool" -outfile "$TargetFolder/$Tool"
+  Write-Host "Fetching $Tool"
+  Invoke-WebRequest -Uri "http://live.sysinternals.com/$Tool" -outfile "$TargetFolder/$Tool"
+  Write-Host "Done `"$TargetFolder/$Tool`""
 }

@@ -1,4 +1,5 @@
 <#
+CloudyWindows.io Escalation Toolkit: http://cloudywindows.io
 #Best explanation of why this coded is needed: https://cloudywindows.com/post/automated-collection-of-diagnostic-system-information-from-systems-you-dont-own/
 #Run this directly from this location with: 
 Invoke-Expression (invoke-webrequest -uri 'https://raw.githubusercontent.com/DarwinJS/WindowsEscalationToolkit/master/CollectAndPackageSystemInfo.ps1')
