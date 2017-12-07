@@ -12,11 +12,13 @@ Invoke-Expression (invoke-webrequest -uri 'https://raw.githubusercontent.com/Dar
 #>
 Function Invoke-FIO {
 Param (
+  [String]$PhysicalDeviceIDsToInitialize,
   [String]$CloudyWindowsToolsRoot = "$(If ("$env:CloudyWindowsToolsRoot") {"$env:CloudyWindowsToolsRoot"} else {"$env:public\CloudyWindows.io_EscallationTools"})",
   [String]$CloudyWindowsToolsCleanUp = "$(If ("$env:CloudyWindowsToolsCleanUp") {"$env:CloudyWindowsToolsCleanUp"} else {"$true"})",
   [String]$Name = "fio disk utility",
   [String]$Description = "disk reading utility useful for initializing AWS EBS volumes",
-  [String]$EXE = 'fio.exe',
+  [String]$Release = 'fio-3.1-x64',
+  [String]$EXE = "$Release\fio.exe",
   [String]$URL = 'http://www.bluestop.org/files/fio/releases/fio-3.1-x64.zip',
   [String]$SubFolder = 'fio'
   )
@@ -63,10 +65,11 @@ If (Test-Path variable:PhysicalDeviceIDsToInitialize)
 If (Test-Path variable:PhysicalDriveEnumList)
 {
   Write-Host "Devices that will be initialized: $($PhysicalDriveEnumList -join ',')"
+  cd $CloudyWindowsToolFolder
   Foreach ($DriveEnum in $PhysicalDriveEnumList)
   {
     Write-output "Initializing \\.\PHYSICALDRIVE$DriveEnum"
-    fio.exe --filename=\\.\PHYSICALDRIVE$DriveEnum --rw=randread --bs=128k --iodepth=32 --ioengine=windowsaio --direct=1 --name=volume-initialize
+    & $EXE --filename=\\.\PHYSICALDRIVE$DriveEnum --rw=randread --bs=128k --iodepth=32 --ioengine=windowsaio --direct=1 --name=volume-initialize
   }
 }
 
