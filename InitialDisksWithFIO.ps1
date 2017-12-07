@@ -10,6 +10,7 @@ To use a different default tool list, call the code like this:
 Invoke-Expression (invoke-webrequest -uri 'https://raw.githubusercontent.com/DarwinJS/WindowsEscalationToolkit/master/DropSysinternalsTools.ps1') -ToolsToPull procexp.exe,procmon.exe
 
 #>
+Function Invoke-FIO {
 Param (
   [String]$CloudyWindowsToolsRoot = "$(If ("$env:CloudyWindowsToolsRoot") {"$env:CloudyWindowsToolsRoot"} else {"$env:public\CloudyWindows.io_EscallationTools"})",
   [String]$CloudyWindowsToolsCleanUp = "$(If ("$env:CloudyWindowsToolsCleanUp") {"$env:CloudyWindowsToolsCleanUp"} else {"$true"})",
@@ -72,4 +73,5 @@ If (Test-Path variable:PhysicalDriveEnumList)
 If ($CloudyWindowsToolCleanup)
 {
   Remove-Item "$CloudyWindowsToolFolder" -Recurse -Force
+}
 }
