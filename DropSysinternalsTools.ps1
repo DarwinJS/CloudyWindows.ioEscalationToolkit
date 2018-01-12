@@ -7,9 +7,11 @@ Grabs one or more sysinternals tools and places them in the target folder.
 
 To use a different default tool list, call the code like this:
 
-Invoke-Expression (invoke-webrequest -uri 'https://raw.githubusercontent.com/DarwinJS/WindowsEscalationToolkit/master/DropSysinternalsTools.ps1') -ToolsToPull procexp.exe,procmon.exe
+Invoke-Expression (invoke-webrequest -uri 'https://github.com/DarwinJS/CloudyWindows.ioEscalationToolkit/blob/master/DropSysinternalsTools.ps1') ; Install-SysinternalsTool -ToolsToPull procexp.exe,procmon.exe
 
 #>
+Function Install-SysInternalsTool {
+
 param (
     [string]$ToolsToPull = ("procexp.exe;procmon.exe;autoruns.exe" -split ';'),
     [string]$TargetFolder = "$env:public"
@@ -25,4 +27,6 @@ ForEach ($Tool in $ToolsToPull)
   Write-Host "Fetching $Tool"
   Invoke-WebRequest -Uri "http://live.sysinternals.com/$Tool" -outfile "$TargetFolder/$Tool"
   Write-Host "Done `"$TargetFolder/$Tool`""
+}
+
 }
