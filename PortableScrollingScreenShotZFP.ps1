@@ -49,16 +49,19 @@ If (!(Test-Path "$CloudyWindowsToolFolder\$EXE"))
   }
 }
 
-Write-Host "Waiting for $CloudyWindowsToolFolder\$EXE to exit"
-Write-Warning "Even after exiting, you will also need to exit the tray icon before automatic cleanup will occur."
+If ($CloudyWindowsToolSuppressCleanup)
+{
+  Write-Warning "Waiting for $CloudyWindowsToolFolder\$EXE to exit (Check for a tray item if exit did not occur when you expected"
+}
+
 $processhandle = start-process -FilePath "$CloudyWindowsToolFolder\$EXE" -wait -PassThru
 
-If (!$CloudyWindowsToolSuppressCleanup)
+If ($CloudyWindowsToolSuppressCleanup)
 {
   While (!$processhandle.HasExited)
   {
     Write-host "Waiting for $EXE to exit"
   }
-  Write-Host "Removing Tool for zero foot print, use switch -CloudWindows"
+  Write-Host "Zero Footprint cleanup, use switch -CloudyWindowsToolsSuppressCleanUp or Environment Variable CloudyWindowsToolsSuppressCleanUp = True"
   Remove-Item "$CloudyWindowsToolFolder" -Recurse -Force
 }
