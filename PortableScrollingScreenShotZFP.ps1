@@ -47,6 +47,7 @@ If (!(Test-Path "$CloudyWindowsToolFolder\$EXE"))
 }
 
 Write-Host "Waiting for $CloudyWindowsToolFolder\$EXE to exit"
+Write-Warning "Even after exiting, you will also need to exit the tray icon before automatic cleanup will occur."
 $processhandle = start-process -FilePath "$CloudyWindowsToolFolder\$EXE" -wait -PassThru
 
 If ($CloudyWindowsToolCleanup)
