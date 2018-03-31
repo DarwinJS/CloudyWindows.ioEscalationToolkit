@@ -1,4 +1,3 @@
-
 <#
 .SYNOPSIS
   Temporarily installs a screenshot tool capable of scrolling capture - automatic cleanup for zero footprint.
@@ -13,11 +12,6 @@
   Escalation Toolkit (Zero Footprint)
 #>
 
-<#
-
-Invoke-Expression (iwr -uri 'https://raw.githubusercontent.com/DarwinJS/WindowsEscalationToolkit/master/DropSysinternalsTools.ps1') -ToolsToPull procexp.exe,procmon.exe
-
-#>
 Param (
   [String]$CloudyWindowsToolsRoot = "$(If ("$env:CloudyWindowsToolsRoot") {"$env:CloudyWindowsToolsRoot"} else {"$env:public\CloudyWindows.io_EscalationTools"})",
   [String]$CloudyWindowsToolsCleanUp = "$(If ("$env:CloudyWindowsToolsCleanUp") {"$env:CloudyWindowsToolsCleanUp"} else {"$true"})",
