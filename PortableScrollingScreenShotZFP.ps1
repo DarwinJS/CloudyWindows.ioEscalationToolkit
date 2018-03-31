@@ -4,6 +4,9 @@
   Why and How Blog Post: https://cloudywindows.com/post/BLOG_URL_HERE
 .DESCRIPTION
   CloudyWindows.io Escalation Toolkit: https://github.com/DarwinJS/CloudyWindows.ioEscalationToolkit
+
+  Capturing evidence of breakage and evidence that fixes are effective is a fundamental part of ensuring escalations 
+
   iex (iwr 'https://raw.githubusercontent.com/DarwinJS/WindowsEscalationToolkit/master/PortableScrollingScreenShotZFP.ps1')
   iwr https://raw.githubusercontent.com/DarwinJS/WindowsEscalationToolkit/master/PortableScrollingScreenShotZFP.ps1' -outfile $env:public\PortableScrollingScreenShotZFP.ps1 ; & $env:public\PortableScrollingScreenShotZFP.ps1 -repeatintervalminutes 1
 .COMPONENT
