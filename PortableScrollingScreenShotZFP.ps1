@@ -14,7 +14,7 @@
 
 Param (
   [String]$CloudyWindowsToolsRoot = "$(If ("$env:CloudyWindowsToolsRoot") {"$env:CloudyWindowsToolsRoot"} else {"$env:public\CloudyWindows.io_EscalationTools"})",
-  [String]$CloudyWindowsToolsCleanUp = "$(If ("$env:CloudyWindowsToolsCleanUp") {"$env:CloudyWindowsToolsCleanUp"} else {"$true"})",
+  [String]$CloudyWindowsToolsSuppressCleanUp = "$(If ("$env:CloudyWindowsToolsSuppressCleanUp" -and "$env:CloudyWindowsToolsSuppressCleanUp" -ilike '*true*') {$True},
   [String]$Name = "PicPick ScreenShot",
   [String]$Description = "Free, Portable, has scrolling screenshots",
   [String]$EXE = 'picpick.exe',
@@ -50,7 +50,7 @@ Write-Host "Waiting for $CloudyWindowsToolFolder\$EXE to exit"
 Write-Warning "Even after exiting, you will also need to exit the tray icon before automatic cleanup will occur."
 $processhandle = start-process -FilePath "$CloudyWindowsToolFolder\$EXE" -wait -PassThru
 
-If ($CloudyWindowsToolCleanup)
+If (!$CloudyWindowsToolSuppressCleanup)
 {
   While (!$processhandle.HasExited)
   {
