@@ -1,17 +1,25 @@
+
 <#
-CloudyWindows.io Escalation Toolkit: http://cloudywindows.io
-#Run this directly from this location with: 
-Invoke-Expression (invoke-webrequest -uri 'https://raw.githubusercontent.com/DarwinJS/WindowsEscalationToolkit/master/DropSysinternalsTools.ps1')
+.SYNOPSIS
+  Temporarily installs a screenshot tool capable of scrolling capture - automatic cleanup for zero footprint.
+  Why and How Blog Post: https://cloudywindows.com/post/BLOG_URL_HERE
+.DESCRIPTION
+  CloudyWindows.io Escalation Toolkit: https://github.com/DarwinJS/CloudyWindows.ioEscalationToolkit
+  iex (iwr 'https://raw.githubusercontent.com/DarwinJS/WindowsEscalationToolkit/master/PortableScrollingScreenShotZFP.ps1')
+  iwr https://raw.githubusercontent.com/DarwinJS/WindowsEscalationToolkit/master/PortableScrollingScreenShotZFP.ps1' -outfile $env:public\PortableScrollingScreenShotZFP.ps1 ; & $env:public\PortableScrollingScreenShotZFP.ps1 -repeatintervalminutes 1
+.COMPONENT
+   CloudyWindows.io
+.ROLE
+  Escalation Toolkit (Zero Footprint)
+#>
 
-Grabs one or more sysinternals tools and places them in the target folder.
+<#
 
-To use a different default tool list, call the code like this:
-
-Invoke-Expression (invoke-webrequest -uri 'https://raw.githubusercontent.com/DarwinJS/WindowsEscalationToolkit/master/DropSysinternalsTools.ps1') -ToolsToPull procexp.exe,procmon.exe
+Invoke-Expression (iwr -uri 'https://raw.githubusercontent.com/DarwinJS/WindowsEscalationToolkit/master/DropSysinternalsTools.ps1') -ToolsToPull procexp.exe,procmon.exe
 
 #>
 Param (
-  [String]$CloudyWindowsToolsRoot = "$(If ("$env:CloudyWindowsToolsRoot") {"$env:CloudyWindowsToolsRoot"} else {"$env:public\CloudyWindows.io_EscallationTools"})",
+  [String]$CloudyWindowsToolsRoot = "$(If ("$env:CloudyWindowsToolsRoot") {"$env:CloudyWindowsToolsRoot"} else {"$env:public\CloudyWindows.io_EscalationTools"})",
   [String]$CloudyWindowsToolsCleanUp = "$(If ("$env:CloudyWindowsToolsCleanUp") {"$env:CloudyWindowsToolsCleanUp"} else {"$true"})",
   [String]$Name = "PicPick ScreenShot",
   [String]$Description = "Free, Portable, has scrolling screenshots",
@@ -53,5 +61,6 @@ If ($CloudyWindowsToolCleanup)
   {
     Write-host "Waiting for $EXE to exit"
   }
+  Write-Host "Removing Tool for zero foot print, use switch -CloudWindows"
   Remove-Item "$CloudyWindowsToolFolder" -Recurse -Force
 }
